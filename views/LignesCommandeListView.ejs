@@ -1,0 +1,20 @@
+<%- include('header.ejs') -%>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Qte</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% data.lignesCommande.forEach(lignec=>{ %>
+            <tr>
+                <th scope="row"><%= lignec.produit %></th>
+                <td><%= lignec.qte %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+  </table>
+
+<%- include('footer.ejs') -%>

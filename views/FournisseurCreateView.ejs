@@ -1,0 +1,35 @@
+<%- include('header.ejs') -%>
+
+    <h2>Création d'un Fournisseur :</h2>
+    <div class="col-lg-4">
+        <form action="/fournisseurs/insert" method="POST" id="form">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nom</label>
+              <input class="form-control" name="nom" id="exampleFormControlInput1" required >
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Prénom</label>
+                <input class="form-control" name="prenom" id="exampleFormControlInput1"  required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Adresse</label>
+                <input class="form-control" name="adresse" id="exampleFormControlInput1"  required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Tel</label>
+                <input type="number" class="form-control" name="tel" id="exampleFormControlInput1"  required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Sexe</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="sexe" required>
+                  <option value='M'>Homme</option>
+                  <option value='F'>Femme</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Créer</button>
+            <button class="btn btn-secondary mb-2" onclick="window.history.back()">Annuler</button>
+        </form>
+    </div>
+
+
+<%- include('footer') -%>

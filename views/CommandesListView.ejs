@@ -1,0 +1,30 @@
+<%- include('header.ejs') -%>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Client</th>
+        <th scope="col">Date</th>
+        <th scope="col">Valide</th>
+        <th scope="col">Lignes</th>
+        <% if (data.req.session.usertype == 'admin'){ %> 
+        <th scope="col">Valider</th>
+        <% } %>
+      </tr>
+    </thead>
+    <tbody>
+        <% data.commandes.forEach(commande=>{ %>
+            <tr>
+                <th scope="row"><%= commande.client %></th>
+                <td><%= commande.date.toDateString() %></td>
+                <td><%= commande.valide  %></td>
+                <td><a href="/commandes/<%= commande.id  %>/lignes" class="btn btn-info">Lignes</a></td>
+                <% if (data.req.session.usertype == 'admin'){ %> 
+                <td><a href="/commandes/<%= commande.id  %>/valider" class="btn btn-info">Valider</a></td>
+                <% } %>
+            </tr>
+        <% }) %>
+    </tbody>
+  </table>
+
+<%- include('footer.ejs') -%>

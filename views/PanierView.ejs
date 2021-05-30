@@ -1,0 +1,28 @@
+<%- include('header.ejs') -%>
+
+
+<h1 class="display-4">Mon Panier:</h1>
+
+
+<br></br>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Qte</th>
+      </tr>
+    </thead>
+    <tbody>
+            <% data.panier.forEach(element=>{ %>
+                <tr>
+                    <td><%= element.produit.designation %></td>
+                    <td><%= element.qte %></td>
+                </tr>
+            <% }) %>
+    </tbody>
+  </table>
+
+  <a href="/panier/confirm" class="btn btn-primary">Commander</a>
+
+<%- include('footer.ejs') -%>

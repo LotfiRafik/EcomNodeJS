@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Facturation </title>
+    <!-- <link rel="stylesheet" href="/css/main.css" type="text/css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <style type="text/css">
+  	#sidebar-wrapper {
+    	border-right: 1px solid gray;
+	}
+	h2.a {
+  		line-height: 0.01;
+	}
+	h1.a {
+  		line-height: 0.01;
+	}
+  </style>
+  <body>
+  	<div class="container-fluid">
+
+    <%- include('navbar.ejs') -%>
+
+	<br><br>
+
+    <header class="row">
+        	 <img src="/images/banniere.png" alt="banniere" width="100%" > 
+	</header>
+	<div class="row">
+    	<div class="col-lg-12">
+        	<p>
+            	Bienvenue <strong><%= data.req.session.username %></strong> 
+          	</p>
+		</div>
+    </div>
+
+	<div class="row">
+                    
+		<div id="sidebar-wrapper" class="col-lg-2">
+			<div id="sidebar">
+                
+                <%- include('navsidebar.ejs') -%>
+
+       		</div>
+       	</div>
+
+
+
+        <section class="col-lg-10 pull-right"> 

@@ -1,0 +1,28 @@
+<%- include('header.ejs') -%>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Factures</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% data.clients.forEach(client=>{ %>
+            <tr>
+                <th scope="row"><%= client.id %></th>
+                <td><%= client.lastname%></td>
+                <td><%= client.firstname%></td>
+                <td><a href="/users/clients/<%= client.id %>" class="btn btn-warning">Modifier</a></td>
+                <td><a href="/users/clients/<%= client.id %>/delete"" class="btn btn-danger">Supprimer</a></td>
+                <td><a href="/users/clients/<%= client.id %>"" class="btn btn-info">Factures</a></td>
+            </tr>
+        <% }) %>
+    </tbody>
+  </table>
+
+<%- include('footer.ejs') -%>
