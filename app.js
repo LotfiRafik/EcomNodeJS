@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+
 const dotenv = require('dotenv');
+dotenv.config();
+
 const Joi = require('joi');
 var session = require('express-session');
 
@@ -41,4 +44,4 @@ app.use('/panier', panier);
 app.use('/commandes', commandes);
 
 
-app.listen(3000);
+app.listen(process.env.PORT);
