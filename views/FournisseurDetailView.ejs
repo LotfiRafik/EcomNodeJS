@@ -1,6 +1,6 @@
 <%- include('header.ejs') -%>
 
-    <h2>Modification du Fournisseur : <%= data.fournisseur.nom + ' ' +  data.fournisseur.prenom %></h2>
+    <h2>Fournisseur : <%= data.fournisseur.nom + ' ' +  data.fournisseur.prenom %></h2>
     <div class="col-lg-4">
         <form action="/fournisseurs/<%= data.req.params.id %>/update" method="POST" id="form">
             <div class="form-group">

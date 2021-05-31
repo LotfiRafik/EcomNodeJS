@@ -30,7 +30,6 @@ class dbService{
     }
 
 
-
     async getFournisseurProducts(fournisseurId) {
         try{
             const response = await new Promise((resolve, reject)=>{
@@ -164,7 +163,7 @@ class dbService{
     async getLignesCommande(commandeId) {
         try{
             const response = await new Promise((resolve, reject)=>{
-                const query = "SELECT * FROM lignescommande WHERE commande=?;";
+                const query = "SELECT lc.qte, p.designation, p.prix FROM lignescommande lc INNER JOIN produits p ON lc.produit=p.id WHERE commande=?;";
                 connection.query(query,[commandeId],(err,results)=>{
                     if (err) reject(new Error(err.message));
                     resolve(results);
@@ -282,7 +281,7 @@ class dbService{
     async getCommandes() {
         try{
             const response = await new Promise((resolve, reject)=>{
-                const query = "SELECT * FROM commandes;";
+                const query = "SELECT c.id, c.date, c.valide, u.firstname, u.lastname FROM commandes c INNER JOIN users u ON c.client=u.id";
                 connection.query(query, (err,results)=>{
                     if (err) reject(new Error(err.message));
                     resolve(results);
@@ -298,7 +297,7 @@ class dbService{
     async getClientCommandes(clientId) {
         try{
             const response = await new Promise((resolve, reject)=>{
-                const query = "SELECT * FROM commandes where client=?;";
+                const query = "SELECT c.id, c.date, c.valide, u.firstname, u.lastname FROM commandes c INNER JOIN users u ON c.client=u.id WHERE client=?;";
                 connection.query(query, [clientId],(err,results)=>{
                     if (err) reject(new Error(err.message));
                     resolve(results);

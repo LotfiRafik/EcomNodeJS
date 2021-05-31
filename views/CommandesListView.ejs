@@ -15,9 +15,13 @@
     <tbody>
         <% data.commandes.forEach(commande=>{ %>
             <tr>
-                <th scope="row"><%= commande.client %></th>
+                <th scope="row"><%= commande.firstname + ' ' + commande.lastname %> </th>
                 <td><%= commande.date.toDateString() %></td>
-                <td><%= commande.valide  %></td>
+                <% if (commande.valide == 1){ %> 
+                  <td><i class="far fa-check-circle fa-2x" style="color: green;"></i></td>
+                <% } else { %>
+                  <td><i class="far fa-times-circle fa-2x" style="color: red;"></i></td>
+                <% } %>
                 <td><a href="/commandes/<%= commande.id  %>/lignes" class="btn btn-info">Lignes</a></td>
                 <% if (data.req.session.usertype == 'admin'){ %> 
                 <td><a href="/commandes/<%= commande.id  %>/valider" class="btn btn-info">Valider</a></td>

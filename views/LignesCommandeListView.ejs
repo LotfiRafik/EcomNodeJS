@@ -4,13 +4,15 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Produit</th>
+        <th scope="col">Prix</th>
         <th scope="col">Qte</th>
       </tr>
     </thead>
     <tbody>
         <% data.lignesCommande.forEach(lignec=>{ %>
             <tr>
-                <th scope="row"><%= lignec.produit %></th>
+                <th scope="row"><%= lignec.designation %></th>
+                <td><%= lignec.prix %></td>
                 <td><%= lignec.qte %></td>
             </tr>
         <% }) %>

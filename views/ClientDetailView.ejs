@@ -1,6 +1,6 @@
 <%- include('header.ejs') -%>
 
-    <h2>Modification du client : <%= data.client.lastname + ' ' +  data.client.firstname %></h2>
+    <h2>Client : <%= data.client.lastname + ' ' +  data.client.firstname %></h2>
     <div class="col-lg-4">
         <form action="/users/clients/<%= data.req.params.id %>/update" method="POST" id="form">
             <div class="form-group">
