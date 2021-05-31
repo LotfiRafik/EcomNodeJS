@@ -3,9 +3,16 @@ const dbService = require(__dirname+'/../models/dbService');
 class productsController{
 
     static getAllProducts(req, res) {
+        let result;
         console.log(req.session);
         const db = dbService.getDbServiceInstance();
-        const result = db.getAllData();
+        let fournisseurId = req.query.fournisseurId;
+        if (fournisseurId != null){
+            result = db.getFournisseurProducts(fournisseurId);
+        }
+        else{
+            result = db.getAllData();
+        }
         result.then(data => res.render('ProductsListView', {
             data : {
                 products : data,

@@ -13,4 +13,9 @@ route.all('/:commandeId([0-9]+)/lignes', (req,res)=>{
     panierController.getLignesCommande(req,res);
 })
 
+route.all('/:commandeId([0-9]+)/valider', (req,res)=>{
+    //call controller
+    panierController.validerCommande(req,res);
+})
+
 module.exports = route;

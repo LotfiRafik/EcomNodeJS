@@ -1,4 +1,5 @@
 const express = require('express');
+const panierController = require('../controllers/panier_controller');
 const usersController = require('../controllers/users_controller');
 
 
@@ -44,5 +45,6 @@ route.all('/clients/:id([0-9]+)/delete', (req,res)=>{
     //call controller
     usersController.deleteClient(req,res);
 })
+
 
 module.exports = route;

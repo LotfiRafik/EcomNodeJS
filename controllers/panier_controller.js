@@ -5,6 +5,23 @@ const productsController = require('./products_controller');
 
 class panierController{
 
+
+    static validerCommande(req, res) {
+
+        let commandeId;
+        const db = dbService.getDbServiceInstance();
+
+        commandeId = req.params.commandeId;
+        const result = db.validerCommande(commandeId);
+        result.then(__ => {
+            console.log('validate commande '+ commandeId);
+        }).catch(err => {
+            console.log(err);
+        });
+        res.redirect('/commandes');
+
+    }
+
     static getPanier(req, res) {
 
         const db = dbService.getDbServiceInstance();
@@ -125,7 +142,13 @@ class panierController{
             result = db.getClientCommandes(req.session.userId);
         }
         else{
-            result = db.getCommandes();
+            let clientId = req.query.clientId;
+            if (clientId == null){
+                result = db.getCommandes();
+            }
+            else{
+                result = db.getClientCommandes(clientId);
+            }
         }
         result.then(data => res.render('CommandesListView', {
             data : {

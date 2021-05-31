@@ -29,6 +29,24 @@ class dbService{
         return instance ? instance : new dbService();
     }
 
+
+
+    async getFournisseurProducts(fournisseurId) {
+        try{
+            const response = await new Promise((resolve, reject)=>{
+                const query = "SELECT * FROM produits WHERE fournisseur = ?;";
+                connection.query(query, [fournisseurId] ,(err,results)=>{
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                });
+            });
+            return response;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     async getAllData() {
         try{
             const response = await new Promise((resolve, reject)=>{
@@ -372,6 +390,22 @@ class dbService{
 
     }
 
+
+    async validerCommande(commandeId) {
+        try{
+            const response = await new Promise((resolve, reject)=>{
+                const query = "UPDATE commandes SET valide = true WHERE id=?;";
+                connection.query(query,[commandeId],(err,results)=>{
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                });
+            });
+            return response;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 
 
 }

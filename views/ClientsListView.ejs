@@ -8,7 +8,7 @@
         <th scope="col">Prénom</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
-        <th scope="col">Factures</th>
+        <th scope="col">Commandes</th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
                 <td><%= client.firstname%></td>
                 <td><a href="/users/clients/<%= client.id %>" class="btn btn-warning">Modifier</a></td>
                 <td><a href="/users/clients/<%= client.id %>/delete"" class="btn btn-danger">Supprimer</a></td>
-                <td><a href="/users/clients/<%= client.id %>"" class="btn btn-info">Factures</a></td>
+                <td><a href="/commandes?clientId=<%= client.id %>" class="btn btn-info">Commandes</a></td>
             </tr>
         <% }) %>
     </tbody>

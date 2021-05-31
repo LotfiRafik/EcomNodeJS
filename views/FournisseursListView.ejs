@@ -1,7 +1,7 @@
 <%- include('header.ejs') -%>
 
 
-<h1 class="display-4">La liste des fournisseurs:</h1>
+<h2>La liste des fournisseurs:</h2>
 
 <a href="/fournisseurs/insert" class="btn btn-primary">Ajouter fournisseur</a>
 
@@ -16,6 +16,7 @@
         <th scope="col">Adresse</th>
         <th scope="col">Tel</th>
         <th scope="col">Sexe</th>
+        <th scope="col">Produits</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -29,9 +30,10 @@
                 <td><%= fournisseur.adresse%></td>
                 <td><%= fournisseur.tel%></td>
                 <td><%= fournisseur.sexe%></td>
+                <td><a href="/products?fournisseurId=<%= fournisseur.id %>"" class="btn btn-info">Produits</a></td>
                 <td><a href="/fournisseurs/<%= fournisseur.id %>" class="btn btn-warning">Modifier</a></td>
                 <td><a href="/fournisseurs/<%= fournisseur.id %>/delete"" class="btn btn-danger">Supprimer</a></td>
-            </tr>
+              </tr>
         <% }) %>
     </tbody>
   </table>
