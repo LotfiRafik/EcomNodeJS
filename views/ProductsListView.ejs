@@ -1,16 +1,15 @@
 <%- include('header.ejs') -%>
 
-    <div class="container py-5">
-        <div class="row text-center mb-5">
-            <div class="col-lg-7 mx-auto">
-                <h1 class="display-4">La liste des produits:</h1>
-                <% if(data.req.session.usertype=='admin'){ %>
-                <a href="/products/insert" class="btn btn-primary">Ajouter produit</a>
-                <% } %>
-            </div>
-        </div>
+    <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <% if(data.req.session.usertype=='admin'){ %>
+                            <a href="/products/insert" class="btn btn-primary">Ajouter produit</a>
+                        <% } %>
+                    </div>
+                </div>
                 <!-- List group-->
                 <ul class="list-group shadow">
                     <% data.products.forEach(product=>{ %>

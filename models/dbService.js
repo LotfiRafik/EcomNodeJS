@@ -11,20 +11,21 @@ const connection = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
-connection.connect((err) => {
-    if(err) {
-        console.log(err.message);
-    }
-    else{
-        // console.log('db '+ connection.state);
-    }
-});
+
 
 let instance;
 
 class dbService{
 
     static getDbServiceInstance(){
+        connection.connect((err) => {
+            if(err) {
+                console.log(err.message);
+            }
+            else{
+                // console.log('db '+ connection.state);
+            }
+        });
         return instance ? instance : new dbService();
     }
 
