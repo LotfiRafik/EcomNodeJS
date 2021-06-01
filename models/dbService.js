@@ -3,31 +3,39 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-});
-
-connection.connect((err) => {
-    if(err) {
-        console.log(err.message);
-    }
-    else{
-        // console.log('db '+ connection.state);
-    }
-});
-
-
+let connection;
 let instance;
 
 class dbService{
 
-    static getDbServiceInstance(){
 
-        return instance ? instance : new dbService();
+    static getDbServiceInstance(){
+        
+        connection = mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT
+        });
+
+        connection.connect(function(err) {
+            if (err) {
+              console.error('error connecting: ' + err.stack);
+              return;
+            }
+            console.log('connected as id ' + connection.threadId);
+          });
+
+        if(instance == null){
+            console.log('new dbService instance');
+            instance = new dbService();
+        }
+        else{
+            console.log('Using OLD dbService INSTANCE');
+        }
+
+        return instance;
     }
 
 
@@ -36,6 +44,8 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM produits WHERE fournisseur = ?;";
                 connection.query(query, [fournisseurId] ,(err,results)=>{
+                    console.log('connection ID : ' + connection.threadId);
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -53,6 +63,8 @@ class dbService{
                 const query = "SELECT * FROM produits;";
                 connection.query(query, (err,results)=>{
                     if (err) reject(new Error(err.message));
+                    console.log('connection ID : ' + connection.threadId);
+                    connection.end();
                     resolve(results);
                 });
             });
@@ -68,6 +80,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM users WHERE usertype='client';";
                 connection.query(query, (err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -84,6 +97,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM users WHERE usertype='client' and id=?;";
                 connection.query(query,[id],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -100,6 +114,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM produits WHERE id=?;";
                 connection.query(query,[id],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -116,6 +131,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "UPDATE users SET lastname = ?,firstname = ? WHERE usertype='client' and id=?;";
                 connection.query(query,[client.lastname, client.firstname, id],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -133,6 +149,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "DELETE FROM users WHERE id = ? AND usertype='client';";
                 connection.query(query, [id],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.affectedRows);
                 });
@@ -150,6 +167,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM fournisseurs WHERE id=?;";
                 connection.query(query,[id],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -166,6 +184,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT lc.qte, p.designation, p.prix FROM lignescommande lc INNER JOIN produits p ON lc.produit=p.id WHERE commande=?;";
                 connection.query(query,[commandeId],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -182,6 +201,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "UPDATE fournisseurs SET nom = ?, prenom = ? WHERE id=?;";
                 connection.query(query,[fournisseur.nom, fournisseur.prenom, id],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -199,6 +219,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "DELETE FROM fournisseurs WHERE id = ?;";
                 connection.query(query, [id],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result);
                 });
@@ -216,6 +237,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM users WHERE username = ? AND password = ?;";
                 connection.query(query,[credentials.username, credentials.password],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -232,6 +254,7 @@ class dbService{
             const insertId = await new Promise((resolve, reject)=>{
                 const query = "INSERT INTO users (username,email,password,firstname,lastname,usertype) VALUES (?,?,?,?,?,?);";
                 connection.query(query, [user.username, user.email, user.password, user.firstname, user.lastname, user.usertype],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result);
                 });
@@ -251,6 +274,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM fournisseurs;";
                 connection.query(query, (err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -267,6 +291,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM categories;";
                 connection.query(query, (err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -284,6 +309,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT c.id, c.date, c.valide, u.firstname, u.lastname FROM commandes c INNER JOIN users u ON c.client=u.id";
                 connection.query(query, (err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -300,6 +326,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT c.id, c.date, c.valide, u.firstname, u.lastname FROM commandes c INNER JOIN users u ON c.client=u.id WHERE client=?;";
                 connection.query(query, [clientId],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
@@ -317,6 +344,7 @@ class dbService{
             const insertId = await new Promise((resolve, reject)=>{
                 const query = "INSERT INTO produits (designation,prix,fournisseur,categorie) VALUES (?,?,?,?);";
                 connection.query(query, [product.designation, product.prix, product.fournisseur, product.categorie],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
                 });
@@ -337,6 +365,7 @@ class dbService{
             const insertId = await new Promise((resolve, reject)=>{
                 const query = "INSERT INTO fournisseurs (nom,prenom,adresse,tel,sexe) VALUES (?,?,?,?,?);";
                 connection.query(query, [fournisseur.nom, fournisseur.prenom, fournisseur.adresse, fournisseur.tel, fournisseur.sexe],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
                 });
@@ -358,6 +387,7 @@ class dbService{
             const insertId = await new Promise((resolve, reject)=>{
                 const query = "INSERT INTO commandes (client) VALUES (?);";
                 connection.query(query, [clientId],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
                 });
@@ -377,6 +407,7 @@ class dbService{
             const insertId = await new Promise((resolve, reject)=>{
                 const query = "INSERT INTO lignescommande (produit,qte,commande) VALUES (?,?,?);";
                 connection.query(query, [productId, qte, commandeId],(err,result)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
                 });
@@ -396,6 +427,7 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "UPDATE commandes SET valide = true WHERE id=?;";
                 connection.query(query,[commandeId],(err,results)=>{
+                    connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
                 });
