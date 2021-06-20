@@ -1,3 +1,4 @@
+<div class="row">
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -19,7 +20,6 @@
                     <a class="nav-link"">Logged in as <%= data.req.session.username %></a>
                 </li>
                 <form class="form-inline my-2 my-lg-0" action="/users/logout/" method="GET">
-                    <!-- {% csrf_token %} -->
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
                 </form>
             </ul>
@@ -35,3 +35,4 @@
         <% } %>
         </div>
 </nav>
+</div>

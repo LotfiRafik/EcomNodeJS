@@ -4,7 +4,6 @@ class productsController{
 
     static getAllProducts(req, res) {
         let result;
-        console.log(req.session);
         const db = dbService.getDbServiceInstance();
         let fournisseurId = req.query.fournisseurId;
         if (fournisseurId != null){
@@ -19,6 +18,7 @@ class productsController{
                 req : req
             }
         })).catch(err => console.log(err));
+
     };
 
     static getProduct(id, req, res) {
@@ -55,6 +55,7 @@ class productsController{
             {
                 const db = dbService.getDbServiceInstance();
                 let newProduct = req.body;
+                newProduct.image = req.file.path;
                 const result = db.insertProduct(newProduct);
                 
                 result.then(data => res.redirect("/products/")).catch(err => console.log(err));

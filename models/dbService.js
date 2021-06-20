@@ -24,15 +24,10 @@ class dbService{
               console.error('error connecting: ' + err.stack);
               return;
             }
-            console.log('connected as id ' + connection.threadId);
           });
 
         if(instance == null){
-            console.log('new dbService instance');
             instance = new dbService();
-        }
-        else{
-            console.log('Using OLD dbService INSTANCE');
         }
 
         return instance;
@@ -44,7 +39,6 @@ class dbService{
             const response = await new Promise((resolve, reject)=>{
                 const query = "SELECT * FROM produits WHERE fournisseur = ?;";
                 connection.query(query, [fournisseurId] ,(err,results)=>{
-                    console.log('connection ID : ' + connection.threadId);
                     connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(results);
@@ -63,7 +57,6 @@ class dbService{
                 const query = "SELECT * FROM produits;";
                 connection.query(query, (err,results)=>{
                     if (err) reject(new Error(err.message));
-                    console.log('connection ID : ' + connection.threadId);
                     connection.end();
                     resolve(results);
                 });
@@ -342,8 +335,8 @@ class dbService{
     async insertProduct(product) {
         try{
             const insertId = await new Promise((resolve, reject)=>{
-                const query = "INSERT INTO produits (designation,prix,fournisseur,categorie) VALUES (?,?,?,?);";
-                connection.query(query, [product.designation, product.prix, product.fournisseur, product.categorie],(err,result)=>{
+                const query = "INSERT INTO produits (designation,prix,fournisseur,categorie,image) VALUES (?,?,?,?,?);";
+                connection.query(query, [product.designation, product.prix, product.fournisseur, product.categorie, product.image],(err,result)=>{
                     connection.end();
                     if (err) reject(new Error(err.message));
                     resolve(result.insertId);
