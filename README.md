@@ -1,4 +1,6 @@
 # Ecommerce web app built with NodeJS
+## [Click to check live demo on heroku platform](https://ecomnodejs.herokuapp.com/products/)
+
 # Some ScreenShots
 Home View
 #### ![alt text](https://github.com/LotfiRafik/EcomNodeJS/blob/master/ScreenShots/HomePage.png)
