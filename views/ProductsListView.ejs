@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col">
                         <% if(data.req.session.usertype=='admin'){ %>
-                            <a href="/products/insert" class="btn btn-primary">Ajouter produit</a>
+                            <a href="/products/insert" class="btn btn-primary">Add product</a>
                         <% } %>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                         <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
                                     </ul>
                                 </div>
-                                <a href="/panier/add/<%= product.id %>" class="btn btn-info">Ajouter au panier</a>
+                                <a href="/panier/add/<%= product.id %>" class="btn btn-info">Add to cart</a>
 
                             </div><img src="<%= '/'+product.image.substr(7) %>" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->

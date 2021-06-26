@@ -1,7 +1,7 @@
 <%- include('header.ejs') -%>
 
 
-<h1 class="display-4">Mon Panier:</h1>
+<h1 class="display-4">My basket:</h1>
 
 
 <br></br>
@@ -9,8 +9,9 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Produit</th>
+        <th scope="col">Product</th>
         <th scope="col">Qte</th>
+        <th scope="col">Image</th>
       </tr>
     </thead>
     <tbody>
@@ -18,11 +19,13 @@
                 <tr>
                     <td><%= element.produit.designation %></td>
                     <td><%= element.qte %></td>
+                    <td><img src="<%= '/'+element.produit.image.substr(7) %>" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2"></td>
+
                 </tr>
             <% }) %>
     </tbody>
   </table>
 
-  <a href="/panier/confirm" class="btn btn-primary">Commander</a>
+  <a href="/panier/confirm" class="btn btn-primary">Order</a>
 
 <%- include('footer.ejs') -%>

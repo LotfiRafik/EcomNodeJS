@@ -1,6 +1,6 @@
 <%- include('header.ejs') -%>
 
-    <h2>Création d'un Produit :</h2>
+    <h2>Product Creation :</h2>
     <div class="col-lg-4">
         <form action="/products/insert" method="POST" id="form"  enctype="multipart/form-data">
             <div class="form-group">
@@ -8,11 +8,11 @@
               <input class="form-control" name="designation" id="exampleFormControlInput1" required >
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1">Prix</label>
+                <label for="exampleFormControlInput1">Price</label>
                 <input type="number" class="form-control" name="prix" id="exampleFormControlInput1" value="0" required>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Fournisseur</label>
+              <label for="exampleFormControlSelect1">Supplier</label>
               <select class="form-control" id="exampleFormControlSelect1" name="fournisseur" required>
                 <% data.fournisseurs.forEach(fournisseur=>{ %>
                   <option value=<%= fournisseur.id%> ><%= fournisseur.nom + ' ' + fournisseur.prenom %></option>
@@ -20,7 +20,7 @@
               </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Catégorie</label>
+                <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="categorie" required>
                   <% data.categories.forEach(categorie=>{ %>
                   <option value=<%= categorie.id%> ><%= categorie.nom %></option>
@@ -31,8 +31,8 @@
                 <label for="exampleFormControlFile1">Image</label>
                 <input type="file" class="form-control-file" name="image"  id="exampleFormControlFile1">
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Créer</button>
-            <button class="btn btn-secondary mb-2" onclick="window.history.back()">Annuler</button>
+            <button type="submit" class="btn btn-primary mb-2">Create</button>
+            <button class="btn btn-secondary mb-2" onclick="window.history.back()">Cancel</button>
         </form>
     </div>
 

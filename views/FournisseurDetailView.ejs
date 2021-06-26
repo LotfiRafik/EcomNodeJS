@@ -1,18 +1,18 @@
 <%- include('header.ejs') -%>
 
-    <h2>Fournisseur : <%= data.fournisseur.nom + ' ' +  data.fournisseur.prenom %></h2>
+    <h2>Supplier : <%= data.fournisseur.nom + ' ' +  data.fournisseur.prenom %></h2>
     <div class="col-lg-4">
         <form action="/fournisseurs/<%= data.req.params.id %>/update" method="POST" id="form">
             <div class="form-group">
-              <label for="exampleFormControlInput1">Nom</label>
+              <label for="exampleFormControlInput1">LastName</label>
               <input class="form-control" name="nom" value="<%= data.fournisseur.nom %>" required >
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1">Prénom</label>
+                <label for="exampleFormControlInput1">FirstName</label>
                 <input class="form-control" name="prenom"  value="<%= data.fournisseur.prenom %>" required>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Modifier</button>
-            <button class="btn btn-secondary mb-2" onclick="window.history.back()">Annuler</button>
+            <button type="submit" class="btn btn-primary mb-2">Edit</button>
+            <button class="btn btn-secondary mb-2" onclick="window.history.back()">Cancel</button>
         </form>
     </div>
 

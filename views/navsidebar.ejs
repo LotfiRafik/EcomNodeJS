@@ -1,21 +1,21 @@
 <ul class="nav list-group">
 	<li>
-		<a class="list-group-item" href="/products/" >Produits</a>
+		<a class="list-group-item" href="/products/" >Products</a>
 	</li>
 	<% if(data.req.session.loggedin){%>
 	<li>
-		<a class="list-group-item" href="/commandes">Commandes</a>
+		<a class="list-group-item" href="/commandes">Orders</a>
 	</li>
     <% if(data.req.session.usertype == 'client'){%>
 	<li>
-    	<a class="list-group-item" href="/panier">Mon Panier</a>
+    	<a class="list-group-item" href="/panier">My basket</a>
 	</li>
 	<% } if(data.req.session.usertype == 'admin'){%>
 	<li>
 			<a class="list-group-item" href="/users/clients">Clients</a>
 	</li>
 	<li>
-			<a class="list-group-item" href="/fournisseurs">Fournisseurs</a>
+			<a class="list-group-item" href="/fournisseurs">Suppliers</a>
 	</li>
 	<li>
 		<a class="list-group-item" href="{% url 'dashboard' %}">Dashboard</a>

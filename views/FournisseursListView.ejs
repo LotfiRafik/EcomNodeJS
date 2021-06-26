@@ -1,9 +1,9 @@
 <%- include('header.ejs') -%>
 
 
-<h2>La liste des fournisseurs:</h2>
+<h2>Supplier list:</h2>
 
-<a href="/fournisseurs/insert" class="btn btn-primary">Ajouter fournisseur</a>
+<a href="/fournisseurs/insert" class="btn btn-primary">Add supplier</a>
 
 <br></br>
 
@@ -11,12 +11,12 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Adresse</th>
+        <th scope="col">LastName</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">Address</th>
         <th scope="col">Tel</th>
-        <th scope="col">Sexe</th>
-        <th scope="col">Produits</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Products</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -30,9 +30,9 @@
                 <td><%= fournisseur.adresse%></td>
                 <td><%= fournisseur.tel%></td>
                 <td><%= fournisseur.sexe%></td>
-                <td><a href="/products?fournisseurId=<%= fournisseur.id %>"" class="btn btn-info">Produits</a></td>
-                <td><a href="/fournisseurs/<%= fournisseur.id %>" class="btn btn-warning">Modifier</a></td>
-                <td><a href="/fournisseurs/<%= fournisseur.id %>/delete"" class="btn btn-danger">Supprimer</a></td>
+                <td><a href="/products?fournisseurId=<%= fournisseur.id %>"" class="btn btn-info">Products</a></td>
+                <td><a href="/fournisseurs/<%= fournisseur.id %>" class="btn btn-warning">Edit</a></td>
+                <td><a href="/fournisseurs/<%= fournisseur.id %>/delete"" class="btn btn-danger">Delete</a></td>
               </tr>
         <% }) %>
     </tbody>
